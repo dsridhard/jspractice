@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Link for PDF</title>
+</head>
+<body>
+    
+
+    <script>
+        // Create a query string with the PDF filename
+        const params = new URLSearchParams();
+        params.append('file', '22439.pdf');  // Filename (the PDF file name)
+
+        // Get the query string
+        const queryString = params.toString();  // "file=22439.pdf"
+
+        // Generate the link to the current page with query string
+        const url = `?${queryString}`;  // Using query string for current page
+
+        // Set the href attribute of the link element
+        document.getElementById("pdfLink").href = url;
+    </script>
+
+    <!-- This will be the clickable link -->
+    <a id="pdfLink" href="#">Click here to view the PDF</a>
+
+    <!-- Container to display the PDF -->
+    <div id="pdfViewer"></div>
+
+    <script>
+        // Function to display the PDF when the page loads
+        function displayPDF() {
+            // Get the query string from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const fileName = urlParams.get('file');  // Extract the filename from the query string
+
+            if (fileName) {
+                // If a file is specified in the query string, display the PDF
+                const pdfViewer = document.getElementById("pdfViewer");
+                
+                // Clear any previous PDF content
+                pdfViewer.innerHTML = '';
+
+                // Create an embed element to display the PDF
+                const embed = document.createElement('embed');
+                embed.src = `${fileName}`;  // Path to your PDF file
+                embed.width = '100%';
+                embed.height = '600';
+                embed.type = 'application/pdf';  // Specify the type as PDF
+                pdfViewer.appendChild(embed);  // Append the embed to the viewer div
+
+                // Hide the link after it is clicked
+                document.getElementById("pdfLink").style.display = "none";
+            }
+        }
+
+        // Call the function to display the PDF when the page loads
+        window.onload = displayPDF;
+
+        // Add a click event listener to the link
+        document.getElementById("pdfLink").addEventListener("click", function(event) {
+            event.preventDefault();  // Prevent the default link behavior
+
+            // Reload the page with the query string
+            window.location.search = `?file=22439.pdf`;  // Manually set the query string
+        });
+    </script>
+</body>
+</html>

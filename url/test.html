@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function openPDF() {
+        let fnmae = "22439.pdf";
+        const pdfUrl = "./";
+        const queryString = `?file=${fnmae}`;
+        const fullUrl = pdfUrl + queryString;
+        window.open(fullUrl, "_blank");
+      }
+    </script>
+    <a onclick="openPDF()">Open</a>
+  </body>
+</html>
